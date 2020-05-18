@@ -1,38 +1,60 @@
 <template>
-  <div>
-    <app-header></app-header>
-    <home-page></home-page>
-      <app-footer></app-footer>
-   
-    </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
+
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-content>
+      <HelloWorld/>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import Header from './components/Header.vue';
-import HomePage from './components/HomePage.vue';
-import Footer from './components/Footer.vue';
+import HelloWorld from './components/HelloWorld';
 
 export default {
+  name: 'App',
+
   components: {
-    'app-header': Header,
-    'app-footer': Footer,
-    'home-page': HomePage,
+    HelloWorld,
   },
-  data(){
-    return{
 
-    }
-  }
-}
+  data: () => ({
+    //
+  }),
+};
 </script>
-
-<style>
-
-
-body{
-  background-color: black;
-  width: 60%;
-    margin: 0 auto;
-    
-}
-</style>
