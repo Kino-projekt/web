@@ -12,6 +12,11 @@
         <span>Zaloguj się</span>
       
       </v-btn>
+      
+      <v-btn flat color="grey" class="ml-8">
+        <span>Zarejestruj się</span>
+      
+      </v-btn>
     </v-toolbar>
 
      <v-navigation-drawer
