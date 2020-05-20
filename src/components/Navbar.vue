@@ -61,7 +61,7 @@ export default {
       drawer: false,
       links: [
         { text: 'Strona główna', route: '/' },
-        {  text: 'Newsy', route: '/news' },
+        {  text: 'Artykuły', route: '/articles' },
         {  text: 'Seanse', route: '/seans' },
       ]
     }
