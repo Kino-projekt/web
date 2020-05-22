@@ -13,7 +13,7 @@
       
       </v-btn>
       
-      <v-btn flat color="grey" class="ml-8">
+      <v-btn flat color="grey" class="ml-8" @click="registerHandle">
         <span>Zarejestruj się</span>
       
       </v-btn>
@@ -63,9 +63,19 @@ export default {
         { text: 'Strona główna', route: '/' },
         {  text: 'Artykuły', route: '/articles' },
         {  text: 'Seanse', route: '/seans' },
-      ]
+      ],
+     register:  {  text: 'Register', route: '/register' },
+     
     }
-  }
+  
+  },
+    methods:{
+      registerHandle:function(){
+   
+window.location.href="/register"
+      }
+    }
+    
 }
 </script>
 

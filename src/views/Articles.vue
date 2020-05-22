@@ -18,18 +18,11 @@ export default {
     methods: {
     },
     created() {
-        this.$http.get('https://afternoon-waters-37189.herokuapp.com/api/articles.json').then(function(data){
-            return data.json()
-        }).then(function(data){
-            var blogsArray = [];
-            for (let key in data){
-                data[key].id = key;
-                blogsArray.push(data[key]);
-            }
-            this.blogs = blogsArray;
-            //console.log(this.blogs);
+        this.$http.get('https://afternoon-waters-37189.herokuapp.com/api/articles').then(function(data){
+            console.log(data)
+            this.blogs = data.body;
         });
-    },
+    }
 }
 </script>
 
