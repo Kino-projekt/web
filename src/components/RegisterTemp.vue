@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+
 export default {
     data () {
         return {
@@ -45,19 +45,8 @@ export default {
             submitted: false
         }
     },
-    computed: {
-        ...mapState('account', ['status'])
-    },
-    methods: {
-        ...mapActions('account', ['register']),
-        handleSubmit() {
-            this.submitted = true;
-            this.$validator.validate().then(valid => {
-                if (valid) {
-                    this.register(this.user);
-                }
-            });
-        }
+    
     }
-};
+    
+;
 </script>

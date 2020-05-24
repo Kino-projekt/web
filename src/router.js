@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Articles from './views/Articles.vue'
 import Register from './components/Register.vue'
+import Seances from './views/Seances.vue'
+import Movies from './views/Movies.vue'
 
 Vue.use(Router)
 
@@ -25,6 +27,15 @@ export default new Router({
       name: 'register',
       component: Register
     },
-   
+    {
+      path: '/seances',
+      name: 'seances',
+      component: Seances
+    },
+    {
+      path: '/movies',
+      name: 'movies',
+      component: Movies
+    },
   ]
 })

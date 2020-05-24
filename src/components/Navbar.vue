@@ -62,7 +62,9 @@ export default {
       links: [
         { text: 'Strona główna', route: '/' },
         {  text: 'Artykuły', route: '/articles' },
-        {  text: 'Seanse', route: '/seans' },
+        {  text: 'Seanse', route: '/seances' },
+        {  text: 'Filmy', route: '/movies' },
+        
       ],
      register:  {  text: 'Register', route: '/register' },
      

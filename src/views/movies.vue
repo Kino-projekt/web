@@ -22,7 +22,7 @@ export default {
     },
     created() {
         this.$http.get('https://afternoon-waters-37189.herokuapp.com/api/movies').then(function(data){
-            console.log(data)
+           
             this.movies = data.body;
         });
     }

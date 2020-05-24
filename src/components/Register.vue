@@ -63,8 +63,7 @@ export default {
         url: "https://afternoon-waters-37189.herokuapp.com/api/auth/signup",
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        crossDomain: true,
+        
         data: JSON.stringify(criteria)
       });
       request

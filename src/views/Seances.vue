@@ -19,7 +19,7 @@ export default {
     },
     created() {
         this.$http.get('https://afternoon-waters-37189.herokuapp.com/api/seances').then(function(data){
-            console.log(data)
+          
             this.seances = data.body;
         });
     }
