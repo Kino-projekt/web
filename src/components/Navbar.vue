@@ -70,7 +70,7 @@ export default {
   
   },
     methods:{
-      registerHandle:function(){
+     registerHandle:function(){
    
 window.location.href="/register"
       }

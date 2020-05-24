@@ -52,8 +52,8 @@ export default {
       //   console.log(response)
       // })
       var criteria = {
-        email: "dupa@weza.pl",
-        password: "Hwdpjp100%"
+        email: "xd@dxxx.pl",
+        password: "jsbda24"
       };
 
       var request = $.ajax({

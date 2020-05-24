@@ -1,6 +1,6 @@
 <template>
     <div id="show-blogs">
-        <h1>All Blog Articles</h1>
+        <h1>Artykuły</h1>
         <div v-for="blog in blogs" class="single-blog"  v-bind:key="blog.id">
             <h2>{{ blog.title }}</h2>
             <article>{{ blog.description }}</article>
