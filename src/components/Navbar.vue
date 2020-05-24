@@ -64,6 +64,7 @@ export default {
         {  text: 'Artykuły', route: '/articles' },
         {  text: 'Seanse', route: '/seances' },
         {  text: 'Filmy', route: '/movies' },
+        {  text: 'Dodaj Artykuł', route: '/addArticle' },
         
       ],
      register:  {  text: 'Register', route: '/register' },

@@ -5,6 +5,7 @@ import Articles from './views/Articles.vue'
 import Register from './components/Register.vue'
 import Seances from './views/Seances.vue'
 import Movies from './views/Movies.vue'
+import addArticle from './views/addArticle.vue'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/movies',
       name: 'movies',
       component: Movies
+    },
+    {
+      path: '/addArticle',
+      name: 'addArticle',
+      component: addArticle
     },
   ]
 })
