@@ -1,52 +1,156 @@
 <template>
+  <div id="show-blogs">
+    <h1>Zaloguj</h1>
     <div>
-        <h2>Login</h2>
-        <form @submit.prevent="handleSubmit">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" v-model="username" name="username" class="form-control" :class="{ 'is-invalid': submitted && !username }" />
-                <div v-show="submitted && !username" class="invalid-feedback">Username is required</div>
-            </div>
-            <div class="form-group">
-                <label htmlFor="password">Password</label>
-                <input type="password" v-model="password" name="password" class="form-control" :class="{ 'is-invalid': submitted && !password }" />
-                <div v-show="submitted && !password" class="invalid-feedback">Password is required</div>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-primary" :disabled="status.loggingIn">Login</button>
-                <img v-show="status.loggingIn" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                <router-link to="/register" class="btn btn-link">Register</router-link>
-            </div>
-        </form>
+      <label>E-mail</label>
+      <input type="text" v-model="email" />
     </div>
+    <div>
+      <label>password</label>
+      <input type="password" v-model="password" />
+    </div>
+    <div>
+      <input type="button" value="Zaloguj" @click="handleLogin" />
+      <input type="button" value="Wyslij artykul" @click="handlePostArticle" />
+      <div v-for="error in errors" v-bind:key="error.key">
+        <h2>{{ error.text }}</h2>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import $ from "jquery";
+//const { JSDOM } = require( "jsdom" );
+//const { window } = new JSDOM( "" );
+//const $ = require( "jquery" )( window );
 export default {
-    data () {
-        return {
-            username: '',
-            password: '',
-            submitted: false
-        }
+  data() {
+    return {
+      errors: [],
+      email: "",
+      password: "",
+      token: ""
+    };
+  },
+  methods: {
+    handlePostArticle: function() {
+      var criteria = {
+        title: "test",
+        description: "Testowy artykul",
+        accessToken: this.token
+      };
+      var request = $.ajax({
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Authorization: "Bearer " + this.token
+        },
+        url: "https://afternoon-waters-37189.herokuapp.com/api/admin/articles",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+
+        data: JSON.stringify(criteria)
+      });
+      request
+        .done(response => {
+          console.log(response);
+        })
+        .fail(response => {
+          console.log(response);
+          if (
+            response !== null &&
+            response.responseJSON !== undefined &&
+            response.responseJSON.error != null
+          ) {
+            let errors = response.responseJSON.error.map((e, i) => {
+              return { text: e, key: i };
+            });
+            //Vue.set(this.data, "error", errors);
+            this.errors = this.errors.concat(errors);
+            console.log(this.error);
+          }
+        });
     },
-    computed: {
-        ...mapState('account', ['status'])
-    },
-    created () {
-        // reset login status
-        this.logout();
-    },
-    methods: {
-        ...mapActions('account', ['login', 'logout']),
-        handleSubmit () {
-            this.submitted = true;
-            const { username, password } = this;
-            if (username && password) {
-                this.login({ username, password })
-            }
-        }
+    handleLogin: function() {
+      console.log(this.email);
+      console.log(this.password);
+      //          this.$http.post('https://afternoon-waters-37189.herokuapp.com/api/auth/signup', JSON.stringify({
+      //              email:this.email,
+      //              password:this.password
+      //          }),
+
+      //           {
+      //    headers: {
+
+      //        "Accept":'*/*',
+      //        "Content-Type": "application/json",
+      //        "Access-Control-Allow-Origin": "http://localhost:8080",
+
+      //    }
+      // }
+
+      //           ).then(function (response) {
+      //   console.log(response)
+      // })
+      var criteria = {
+        email: "test@admin.pl",
+        password: "Testowe123!"
+      };
+
+      var request = $.ajax({
+        headers: {
+          "Access-Control-Allow-Origin": "*"
+        },
+        url: "https://afternoon-waters-37189.herokuapp.com/api/auth/signin",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+
+        data: JSON.stringify(criteria)
+      });
+      request
+        .done(response => {
+          if (!Array.isArray(response) && response.length != 2) {
+            this.errors = [
+              {
+                key: 0,
+                text: "bad input"
+              }
+            ];
+            return;
+          }
+
+          this.token = response[1].accessToken;
+          console.log(response);
+        })
+        .fail(response => {
+          console.log(response);
+          if (
+            response !== null &&
+            response.responseJSON !== undefined &&
+            response.responseJSON.error != null
+          ) {
+            let errors = response.responseJSON.error.map((e, i) => {
+              return { text: e, key: i };
+            });
+            //Vue.set(this.data, "error", errors);
+            this.errors = this.errors.concat(errors);
+            console.log(this.error);
+          }
+        });
     }
+  }
 };
 </script>
+
+<style>
+#show-blogs {
+  max-width: 800px;
+  margin: 0px auto;
+}
+.single-blog {
+  padding: 20px;
+  margin: 20px 0;
+  box-sizing: border-box;
+  background: #eee;
+}
+</style>

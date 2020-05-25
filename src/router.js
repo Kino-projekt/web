@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Articles from './views/Articles.vue'
 import Register from './components/Register.vue'
+import Login from './components/Login.vue'
 import Seances from './views/Seances.vue'
 import Movies from './views/Movies.vue'
 import addArticle from './views/addArticle.vue'
@@ -42,6 +43,11 @@ export default new Router({
       path: '/addArticle',
       name: 'addArticle',
       component: addArticle
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
   ]
 })

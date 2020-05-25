@@ -11,6 +11,9 @@
     </div>
     <div>
       <input type="button" value="Zarejestruj" @click="handleRegister" />
+      <div v-for="error in errors" v-bind:key="error.key">
+        <h2>{{ error.text }}</h2>
+      </div>
     </div>
   </div>
 </template>
@@ -24,7 +27,7 @@ export default {
   data() {
     return {
       blogs: [],
-
+      errors: [],
       email: "",
       password: ""
     };
@@ -52,8 +55,8 @@ export default {
       //   console.log(response)
       // })
       var criteria = {
-        email: "xd@dxxx.pl",
-        password: "jsbda24"
+        email: this.email,
+        password: this.password
       };
 
       var request = $.ajax({
@@ -63,14 +66,28 @@ export default {
         url: "https://afternoon-waters-37189.herokuapp.com/api/auth/signup",
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        
+
         data: JSON.stringify(criteria)
       });
       request
         .done(response => {
           console.log(response);
         })
-        .fail(response => console.log(response));
+        .fail(response => {
+          console.log(response);
+          if (
+            response !== null &&
+            response.responseJSON !== undefined &&
+            response.responseJSON.error != null
+          ) {
+            let errors = response.responseJSON.error.map((e, i) => {
+              return { text: e, key: i };
+            });
+            //Vue.set(this.data, "error", errors);
+            this.errors = this.errors.concat(errors);
+            console.log(this.error);
+          }
+        });
     }
   }
 };

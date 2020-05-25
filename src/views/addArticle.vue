@@ -1,5 +1,5 @@
 <template>
-    <div id="add-blog">
+    <div id="add-blog" >
         <h2>Dodaj Artykuł</h2>
       </div>
 </template>

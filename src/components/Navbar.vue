@@ -8,7 +8,7 @@
         <span>Scruter</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn flat color="grey">
+      <v-btn flat color="grey"  @click="loginHandle">
         <span>Zaloguj się</span>
       
       </v-btn>
@@ -43,7 +43,6 @@
           :to="link.route"
         >
          
-
           <v-list-item-content>
             <v-list-item-title>{{ link.text }}</v-list-item-title>
           </v-list-item-content>
@@ -55,6 +54,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -76,6 +76,9 @@ export default {
      registerHandle:function(){
    
 window.location.href="/register"
+      },
+      loginHandle:function(){
+        window.location.href="/login"
       }
     }
     
