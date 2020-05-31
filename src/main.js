@@ -3,12 +3,12 @@ import vuetify from './plugins/vuetify'
 import App from './App.vue'
 import router from './router'
 import VueResource from 'vue-resource'
-import Vuex from 'vuex'
-import $ from 'jquery'
+import store from './store.js';
+import $ from 'jquery';
 
 
 
-Vue.use(Vuex)
+
 
 
 Vue.config.productionTip = false
@@ -22,5 +22,6 @@ new Vue({
   vuetify,
   VueResource,
   $,
+  store,
   render: h => h(App)
 }).$mount('#app')
