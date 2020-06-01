@@ -1,28 +1,45 @@
 <template>
-  <div id="show-blogs">
-    <h1>Register</h1>
-    <div>
-      <label>E-mail</label>
-      <input type="text" v-model="email" />
-    </div>
-    <div>
-      <label>password</label>
-      <input type="password" v-model="password" />
-    </div>
-    <div>
-      <input type="button" value="Zarejestruj" @click="handleRegister" />
-      <div v-for="error in errors" v-bind:key="error.key">
-        <h2>{{ error.text }}</h2>
-      </div>
-    </div>
-  </div>
+  <v-form
+    ref="form"
+    v-model="valid"
+    lazy-validation
+  >
+    
+  <v-col cols="12" sm="6" md="3">
+    <v-text-field 
+      v-model="email"
+      :rules="emailRules"
+      label="E-mail"
+      required
+    ></v-text-field>
+
+    <v-text-field
+      v-model="password"
+      
+      label="Hasło"
+      required
+    ></v-text-field>
+</v-col>
+   
+
+    <v-btn
+      
+      color="success"
+      class="mr-4"
+      @click="handleRegister"
+    >
+      Zarejestruj
+    </v-btn>
+
+    
+
+    
+  </v-form>
 </template>
 
 <script>
 import $ from "jquery";
-//const { JSDOM } = require( "jsdom" );
-//const { window } = new JSDOM( "" );
-//const $ = require( "jquery" )( window );
+
 export default {
   data() {
     return {
@@ -36,24 +53,6 @@ export default {
     handleRegister: function() {
       console.log(this.email);
       console.log(this.password);
-      //          this.$http.post('https://afternoon-waters-37189.herokuapp.com/api/auth/signup', JSON.stringify({
-      //              email:this.email,
-      //              password:this.password
-      //          }),
-
-      //           {
-      //    headers: {
-
-      //        "Accept":'*/*',
-      //        "Content-Type": "application/json",
-      //        "Access-Control-Allow-Origin": "http://localhost:8080",
-
-      //    }
-      // }
-
-      //           ).then(function (response) {
-      //   console.log(response)
-      // })
       var criteria = {
         email: this.email,
         password: this.password
