@@ -21,6 +21,7 @@
 
 <script>
 import $ from "jquery";
+import { actions } from "./actions";
 //const { JSDOM } = require( "jsdom" );
 //const { window } = new JSDOM( "" );
 //const $ = require( "jquery" )( window );
@@ -72,71 +73,11 @@ export default {
         });
     },
     handleLogin: function() {
-      console.log(this.email);
-      console.log(this.password);
-      //          this.$http.post('https://afternoon-waters-37189.herokuapp.com/api/auth/signup', JSON.stringify({
-      //              email:this.email,
-      //              password:this.password
-      //          }),
-
-      //           {
-      //    headers: {
-
-      //        "Accept":'*/*',
-      //        "Content-Type": "application/json",
-      //        "Access-Control-Allow-Origin": "http://localhost:8080",
-
-      //    }
-      // }
-
-      //           ).then(function (response) {
-      //   console.log(response)
-      // })
-      var criteria = {
-        email: "test@admin.pl",
-        password: "Testowe123!"
-      };
-
-      var request = $.ajax({
-        headers: {
-          "Access-Control-Allow-Origin": "*"
-        },
-        url: "https://afternoon-waters-37189.herokuapp.com/api/auth/signin",
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-
-        data: JSON.stringify(criteria)
-      });
-      request
-        .done(response => {
-          if (!Array.isArray(response) && response.length != 2) {
-            this.errors = [
-              {
-                key: 0,
-                text: "bad input"
-              }
-            ];
-            return;
-          }
-
-          this.token = response[1].accessToken;
-          console.log(response);
-        })
-        .fail(response => {
-          console.log(response);
-          if (
-            response !== null &&
-            response.responseJSON !== undefined &&
-            response.responseJSON.error != null
-          ) {
-            let errors = response.responseJSON.error.map((e, i) => {
-              return { text: e, key: i };
-            });
-            //Vue.set(this.data, "error", errors);
-            this.errors = this.errors.concat(errors);
-            console.log(this.error);
-          }
-        });
+      actions.fetchSignIn(this.email, this.password, this.onError);
+    },
+    onError: function(errors) {
+      this.errors = this.errors.concat(errors);
+      console.log(this.error);
     }
   }
 };
