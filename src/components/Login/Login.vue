@@ -22,9 +22,7 @@
 <script>
 import $ from "jquery";
 import { actions } from "./actions";
-//const { JSDOM } = require( "jsdom" );
-//const { window } = new JSDOM( "" );
-//const $ = require( "jquery" )( window );
+
 export default {
   data() {
     return {

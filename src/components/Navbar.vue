@@ -10,9 +10,10 @@
         <span>Zaloguj się</span>
       </v-btn>
 
-      <v-btn flat color="grey" class="ml-8" @click="registerHandle">
+      <v-btn v-show="!this.$store.state.user" flat color="grey" class="ml-8" @click="registerHandle">
         <span>Zarejestruj się</span>
       </v-btn>
+      
       <v-btn v-show="this.$store.state.user" flat color="grey" @click="logout">
         <span>Wyloguj się</span>
       </v-btn>
