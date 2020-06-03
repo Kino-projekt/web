@@ -6,15 +6,19 @@
         <span>Scruter</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn v-show="!this.$store.state.user" flat color="grey" @click="loginHandle">
+      <v-btn v-if="!this.$store.state.token" flat color="grey" @click="loginHandle">
         <span>Zaloguj się</span>
       </v-btn>
 
-      <v-btn v-show="!this.$store.state.user" flat color="grey" class="ml-8" @click="registerHandle">
+      <v-btn v-if="!this.$store.state.token" flat color="grey" class="ml-8" @click="registerHandle">
         <span>Zarejestruj się</span>
       </v-btn>
-      
-      <v-btn v-show="this.$store.state.user" flat color="grey" @click="logout">
+
+      <v-toolbar-title class="text-uppercase grey--text" v-if="this.$store.state.token">
+        <span>{{this.$store.state.user.email}}</span>
+      </v-toolbar-title>
+
+      <v-btn v-if="this.$store.state.token" flat color="grey" @click="logout">
         <span>Wyloguj się</span>
       </v-btn>
     </v-toolbar>

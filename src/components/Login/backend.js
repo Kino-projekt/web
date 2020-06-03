@@ -5,8 +5,7 @@ const SignIn = (email, password) => {
         email: email,
         password: password
     };
-    criteria.email = "test@admin.pl"
-    criteria.password = "Testowe123!"
+  
     var request = $.ajax({
         headers: {
             "Access-Control-Allow-Origin": "*"

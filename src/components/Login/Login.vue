@@ -11,7 +11,7 @@
     </div>
     <div>
       <input type="button" value="Zaloguj" @click="handleLogin" />
-      <input type="button" value="Wyslij artykul" @click="handlePostArticle" />
+     
       <div v-for="error in errors" v-bind:key="error.key">
         <h2>{{ error.text }}</h2>
       </div>
