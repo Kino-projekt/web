@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Articles from './views/Articles.vue'
+import Users from './views/Users.vue'
 import Register from './components/Register/Register.vue'
 import Login from './components/Login/Login.vue'
 import Seances from './views/Seances.vue'
@@ -23,6 +24,11 @@ let router = new Router({
       path: '/articles',
       name: 'articles',
       component: Articles
+    },
+    {
+      path: '/users',
+      name: 'users',
+      component: Users
     },
     {
       path: '/register',
