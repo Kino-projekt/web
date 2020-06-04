@@ -3,6 +3,8 @@
         <h1>Użytkownicy</h1>
         <div v-for="user in users" class="single-blog"  v-bind:key="user.id">
             <h2>{{ user.email }}</h2>
+           
+     
             <article>{{ user.role }}</article>
         </div>
     </div>

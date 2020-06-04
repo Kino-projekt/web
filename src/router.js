@@ -28,7 +28,8 @@ let router = new Router({
     {
       path: '/users',
       name: 'users',
-      component: Users
+      component: Users,
+      
     },
     {
       path: '/register',
@@ -49,10 +50,7 @@ let router = new Router({
       path: '/addArticle',
       name: 'addArticle',
       component: addArticle,
-      meta: {
-        requiresAuth: true,
-        requiresAdmin: true,
-      }
+     
     },
     {
       path: '/login',
