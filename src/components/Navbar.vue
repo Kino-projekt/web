@@ -33,7 +33,12 @@
       <v-divider></v-divider>
 
       <v-list>
-        <v-list-item v-for="link in links" :key="link.text" :to="link.route">
+        <v-list-item v-for="link in links.filter(f => {
+            let store = this.$store            
+            if((!store.state.user || store.state.user.role == 'CUSTOMER') && f.admin)
+              return false
+            return true
+          })" :key="link.text" :to="link.route">
           <v-list-item-content>
             <v-list-item-title>{{ link.text }}</v-list-item-title>
           </v-list-item-content>
@@ -50,12 +55,12 @@ export default {
     return {
       drawer: false,
       links: [
-        { text: "Strona główna", route: "/" },
-        { text: "Artykuły", route: "/articles" },
-        { text: "Seanse", route: "/seances" },
-        { text: "Filmy", route: "/movies" },
-        { text: "Użytkownicy", route: "/users" },
-        { text: "Dodaj Artykuł", route: "/addArticle" }
+        { text: "Strona główna", route: "/", admin: false },
+        { text: "Artykuły", route: "/articles", admin: false },
+        { text: "Seanse", route: "/seances", admin: false },
+        { text: "Filmy", route: "/movies", admin: false },
+        { text: "Użytkownicy", route: "/users", admin: true },
+        { text: "Dodaj Artykuł", route: "/addArticle", admin: true }
       ],
       
     };

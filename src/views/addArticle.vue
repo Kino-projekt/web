@@ -49,11 +49,11 @@ export default {
     },
     methods: {
         handlePostArticle: function() {
-      
-        var title= this.title
-        var description= this.description
-        var accessToken= this.$store.state.token
-      
+       var criteria = {
+        title: this.article.title,
+        description: this.article.description,
+        accessToken: this.$store.state.token
+      };
       var request = $.ajax({
         headers: {
           "Access-Control-Allow-Origin": "*",
@@ -63,8 +63,9 @@ export default {
         type: "POST",
         contentType: "application/json; charset=utf-8",
 
-        data: JSON.stringify(title, description, accessToken)
+        data: JSON.stringify(criteria)
       });
+      console.log(criteria)
       request
         .done(response => {
           console.log(response);
