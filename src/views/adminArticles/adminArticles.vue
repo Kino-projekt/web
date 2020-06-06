@@ -1,6 +1,6 @@
 <template>
     <div id="show-blogs">
-        <h1>Artykuły</h1>
+        <h1>Artykuły Admin </h1>
         <div v-for="blog in blogs" class="single-blog"  v-bind:key="blog.id">
             <h2>{{ blog.title }}</h2>
             <article>{{ blog.description }}</article>
@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import $ from "jquery";
 export default {
     data () {
         return {
@@ -18,11 +19,26 @@ export default {
     methods: {
     },
     created() {
-        this.$http.get('https://afternoon-waters-37189.herokuapp.com/api/articles').then(function(data){
-            console.log(data)
-            this.blogs = data.body;
-            console.log(this.blogs)
-        });
+       $.ajax({
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Authorization: "Bearer " + this.$store.state.token
+        },
+        url: "https://afternoon-waters-37189.herokuapp.com/api/admin/articles",
+        type: "GET",
+         dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        
+        success: function(data){
+   
+    this.blogs = data;
+    console.log(this.blogs)
+   
+}
+    
+      
+       
+      });
     }
 }
 </script>

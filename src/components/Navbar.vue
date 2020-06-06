@@ -60,7 +60,8 @@ export default {
         { text: "Seanse", route: "/seances", admin: false },
         { text: "Filmy", route: "/movies", admin: false },
         { text: "Użytkownicy", route: "/users", admin: true },
-        { text: "Dodaj Artykuł", route: "/addArticle", admin: true }
+        { text: "Dodaj Artykuł", route: "/addArticle", admin: true },
+         { text: "Admin Artykuły", route: "/adminArticles", admin: false },
       ],
       
     };

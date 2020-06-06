@@ -2,12 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Articles from './views/Articles.vue'
+import adminArticles from './views/adminArticles/adminArticles.vue'
 import Users from './views/Users.vue'
 import Register from './components/Register/Register.vue'
 import Login from './components/Login/Login.vue'
 import Seances from './views/Seances.vue'
 import Movies from './views/Movies.vue'
-import addArticle from './views/addArticle.vue'
+import addArticle from './views/adminArticles/addArticle.vue'
 import store from './store.js'
 
 Vue.use(Router)
@@ -24,6 +25,11 @@ let router = new Router({
       path: '/articles',
       name: 'articles',
       component: Articles
+    },
+    {
+      path: '/adminArticles',
+      name: 'adminArticles',
+      component: adminArticles
     },
     {
       path: '/users',
