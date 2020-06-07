@@ -11,7 +11,7 @@
       
       color="error"
       class="mr-4"
-     
+     @click="handleBan"
     >
      Zbanuj
     </v-btn>
@@ -19,7 +19,7 @@
       right
       color="primary"
       class="mr-4"
-      
+      @click="handleChangeStatus"
     >
       Zmień Status
     </v-btn>
@@ -31,7 +31,13 @@
 export default {
     data () {
         return {
-            users: []
+            id:'',
+            users: [],
+            handleBan:function(index){
+                this.id=index
+                console.log(this.id)
+            },
+            handleChangeStatus:function(){}
         }
     },
     methods: {

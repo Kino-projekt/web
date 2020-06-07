@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 import Articles from './views/Articles.vue'
 import adminArticles from './views/adminArticles/adminArticles.vue'
-import Users from './views/Users.vue'
+import Users from './views/Users/Users.vue'
 import Register from './components/Register/Register.vue'
 import Login from './components/Login/Login.vue'
 import Seances from './views/Seances.vue'
