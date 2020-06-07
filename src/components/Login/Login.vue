@@ -1,22 +1,45 @@
 <template>
-  <div id="show-blogs">
-    <h1>Zaloguj</h1>
-    <div>
-      <label>E-mail</label>
-      <input type="text" v-model="email" />
-    </div>
-    <div>
-      <label>password</label>
-      <input type="password" v-model="password" />
-    </div>
-    <div>
-      <input type="button" value="Zaloguj" @click="handleLogin" />
-     
+  <v-form
+    ref="form"
+    v-model="valid"
+    lazy-validation
+  >
+    
+  <v-col cols="12" sm="" md="3">
+    <v-text-field 
+      v-model="email"
+      :rules="emailRules"
+      label="E-mail"
+      counter
+      required
+    ></v-text-field>
+
+   <v-text-field
+            v-model="password"
+             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            
+            :type="show1 ? 'text' : 'password'"
+            name="input-10-1"
+            label="Hasło"
+            hint="Minimum 8 znaków, litera mała, duża, cyfra oraz znak zpecjalny"
+            counter
+            @click:append="show1 = !show1"
+          ></v-text-field>
+</v-col>
+   
+
+    <v-btn
+      
+      color="success"
+      class="mr-4"
+      @click="handleLogin"
+    >
+     Zaloguj
+    </v-btn>
       <div v-for="error in errors" v-bind:key="error.key">
         <h2>{{ error.text }}</h2>
       </div>
-    </div>
-  </div>
+  </v-form>
 </template>
 
 <script>
@@ -26,6 +49,7 @@ import { actions } from "./actions";
 export default {
   data() {
     return {
+      show1:false,
       errors: [],
       email: "",
       password: "",

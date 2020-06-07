@@ -5,20 +5,26 @@
     lazy-validation
   >
     
-  <v-col cols="12" sm="6" md="3">
+  <v-col cols="12" sm="" md="3">
     <v-text-field 
       v-model="email"
       :rules="emailRules"
       label="E-mail"
+      counter
       required
     ></v-text-field>
 
-    <v-text-field
-      v-model="password"
-      
-      label="Hasło"
-      required
-    ></v-text-field>
+   <v-text-field
+            v-model="password"
+             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            
+            :type="show1 ? 'text' : 'password'"
+            name="input-10-1"
+            label="Hasło"
+            hint="Minimum 8 znaków, litera mała, duża, cyfra oraz znak zpecjalny"
+            counter
+            @click:append="show1 = !show1"
+          ></v-text-field>
 </v-col>
    
 
@@ -47,6 +53,7 @@ import  { actions} from './actions'
 export default {
   data() {
     return {
+       show1: false,
       blogs: [],
       errors: [],
       email: "",

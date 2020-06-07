@@ -44,6 +44,7 @@ const logout = () => {
     localStorage.removeItem('user')
     console.log(store.state.token)
     console.log(store.state.user)
+    
 }
 
 const actions = {

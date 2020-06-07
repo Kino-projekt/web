@@ -6,11 +6,11 @@
         <span>Scruter</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn v-if="!this.$store.state.token" flat color="grey" @click="loginHandle">
+      <v-btn v-if="!this.$store.state.token" flat color="primary" @click="$router.push({ path: '/login' })">
         <span>Zaloguj się</span>
       </v-btn>
 
-      <v-btn v-if="!this.$store.state.token" flat color="grey" class="ml-8" @click="registerHandle">
+      <v-btn v-if="!this.$store.state.token" flat color="primary" class="ml-8" @click="$router.push({ path: '/register' })">
         <span>Zarejestruj się</span>
       </v-btn>
 
@@ -18,7 +18,7 @@
         <span>{{this.$store.state.user.email}}</span>
       </v-toolbar-title>
 
-      <v-btn v-if="this.$store.state.token" flat color="grey" @click="logout">
+      <v-btn v-if="this.$store.state.token" flat color="primary" @click="logout">
         <span>Wyloguj się</span>
       </v-btn>
     </v-toolbar>
@@ -50,13 +50,14 @@
 
 <script>
 import { actions } from "./Login/actions";
+
 export default {
   data() {
     return {
       drawer: false,
       links: [
-        { text: "Strona główna", route: "/", admin: false },
-        { text: "Artykuły", route: "/articles", admin: false },
+        { text: "Newsy", route: "/", admin: false },
+        
         { text: "Seanse", route: "/seances", admin: false },
         { text: "Filmy", route: "/movies", admin: false },
         { text: "Użytkownicy", route: "/users", admin: true },
@@ -67,14 +68,11 @@ export default {
     };
   },
   methods: {
-    registerHandle: function() {
-      window.location.href = "/register";
-    },
-    loginHandle: function() {
-      window.location.href = "/login";
-    },
+    
+    
     logout: function() {
       actions.logout();
+     
     }
   }
 };

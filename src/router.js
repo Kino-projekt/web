@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+
 import Articles from './views/Articles.vue'
 import adminArticles from './views/adminArticles/adminArticles.vue'
 import Users from './views/Users.vue'
@@ -18,14 +18,10 @@ let router = new Router({
   base: process.env.BASE_URL,
   routes: [{
       path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/articles',
       name: 'articles',
       component: Articles
     },
+    
     {
       path: '/adminArticles',
       name: 'adminArticles',
