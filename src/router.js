@@ -7,7 +7,8 @@ import Users from './views/Users/Users.vue'
 import Register from './components/Register/Register.vue'
 import Login from './components/Login/Login.vue'
 import Seances from './views/Seances.vue'
-import Movies from './views/Movies.vue'
+import Movies from './views/Movies/Movies.vue'
+import addMovie from './views/Movies/addMovie.vue'
 import addArticle from './views/adminArticles/addArticle.vue'
 import store from './store.js'
 
@@ -47,6 +48,12 @@ let router = new Router({
       path: '/movies',
       name: 'movies',
       component: Movies
+    },
+    {
+      path: '/addMovie',
+      name: 'addmovie',
+      component: addMovie,
+     
     },
     {
       path: '/addArticle',
