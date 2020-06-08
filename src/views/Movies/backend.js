@@ -1,13 +1,39 @@
 import $ from "jquery";
 import store from '../../store'
 
+
+
+
+const deleteMovie = (movieId) =>{
+  var request = $.ajax({
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      Authorization: "Bearer " +  store.state.token
+    },
+    url: `https://afternoon-waters-37189.herokuapp.com/api/admin/movies/${movieId}`,
+    type: "DELETE",
+    contentType: "application/json; charset=utf-8",
+
+   data: null
+  });
+return request;
+
+}
+
+
+
+
+
+
+
 const addMovie = (title, description, director) => {
     var criteria = {
         title: title,
         description: description,
-        director:director,
+        director: director,
         accessToken: store.state.token
       };
+      console.log(criteria)
       var request = $.ajax({
         headers: {
           "Access-Control-Allow-Origin": "*",
@@ -23,7 +49,8 @@ const addMovie = (title, description, director) => {
 }
 
 const backendActions = {
-    'addMovie': addMovie
+    'addMovie': addMovie,
+    'deleteMovie': deleteMovie
 }
 
 export {

@@ -8,6 +8,7 @@ import Register from './components/Register/Register.vue'
 import Login from './components/Login/Login.vue'
 import Seances from './views/Seances.vue'
 import Movies from './views/Movies/Movies.vue'
+import Halls from './views/Halls/Halls.vue'
 import addMovie from './views/Movies/addMovie.vue'
 import addArticle from './views/adminArticles/addArticle.vue'
 import store from './store.js'
@@ -32,6 +33,12 @@ let router = new Router({
       path: '/users',
       name: 'users',
       component: Users,
+      
+    },
+    {
+      path: '/halls',
+      name: 'halls',
+      component: Halls,
       
     },
     {

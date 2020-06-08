@@ -1,63 +1,63 @@
 <template>
-    <div id="show-blogs">
-        <h1>Filmy</h1>
-         <v-btn
+  <div id="show-blogs">
+    <h1>Filmy</h1>
+    <v-btn
       right
       color="success"
       class="mr-4"
       @click="$router.push({ path: '/addMovie' })"
-    >
-      Dodaj Film
-    </v-btn>
-        <div v-for="movie in movies" class="single-blog"  v-bind:key="movie.id">
-            <h2> Tytuł filmu: {{ movie.title }}</h2>
-            <article> Opis filmu: {{ movie.description }}</article>
-            <p> Reżyser: {{ movie.director }}</p>
-              <p> Stworzony: {{ movie.createdAt }}</p>
-              
-                <v-btn
-      
-      color="error"
-      class="mr-4"
-     @click="handleDelete"
-    >
-     Usuń
-    </v-btn>
-    
+    >Dodaj Film</v-btn>
+     <div v-for="error in errors" v-bind:key="error.key">
+        <h2>{{ error.text }}</h2>
+      </div>
+    <div v-for="movie in movies" class="single-blog" v-bind:key="movie.id">
+      <h2>Tytuł filmu: {{ movie.title }}</h2>
+      <article>Opis filmu: {{ movie.description }}</article>
+      <p>Reżyser: {{ movie.director }}</p>
+      <p>Stworzony: {{ movie.createdAt }}</p>
+
+      <v-btn color="error" class="mr-4" @click="handleDelete(movie.id)">Usuń</v-btn>
+     
     </div>
-        </div>
-   
+  </div>
 </template>
 
 <script>
-
+import { actions } from "./actions";
 export default {
-    data () {
-        return {
-            movies: []
-        }
+  data() {
+    return {
+      movies: [],
+      errors: []
+    };
+  },
+  methods: {
+    handleDelete: function(movieId) {
+      actions.deleteMovie(movieId, this.onError);
     },
-    methods: {
-         handleDelete:function(){}
-    },
-    created() {
-        this.$http.get('https://afternoon-waters-37189.herokuapp.com/api/movies').then(function(data){
-           
-            this.movies = data.body;
-        });
+    onError: function(errors) {
+      this.errors = this.errors.concat(errors);
     }
-}
+  },
+  created() {
+    this.$http
+      .get("https://afternoon-waters-37189.herokuapp.com/api/movies")
+      .then(function(data) {
+        this.movies = data.body;
+      });
+  }
+};
 </script>
 
 <style>
-#show-blogs{
-    max-width: 800px;
-    margin: 0px auto;
+#show-blogs {
+  max-width: 800px;
+  margin: 0px auto;
 }
-.single-blog{
-    padding: 20px;
-    margin: 20px 0;
-    box-sizing: border-box;
-    background: #eee;
+.single-blog {
+  padding: 20px;
+  margin: 20px 0;
+  box-sizing: border-box;
+  background: #eee;
 }
 </style>

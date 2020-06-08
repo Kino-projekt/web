@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+let store = new Vuex.Store({
     state: {
         token: localStorage.getItem('token') || '',
         user: localStorage.getItem('user') || null,
@@ -21,3 +21,5 @@ export default new Vuex.Store({
 
 
 });
+
+export default store

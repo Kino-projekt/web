@@ -7,11 +7,12 @@
            
      
             <article>{{ user.role }}</article>
+            <article>{{ user.id }}</article>
       <v-btn
       
       color="error"
       class="mr-4"
-     @click="handleBan"
+     @click="handleBan(user)"
     >
      Zbanuj
     </v-btn>
@@ -28,14 +29,16 @@
 </template>
 
 <script>
+import {actions} from './actions'
 export default {
     data () {
         return {
-            id:'',
+            user:null,
             users: [],
-            handleBan:function(index){
-                this.id=index
-                console.log(this.id)
+            handleBan:function(user){
+                 actions.ban(user.id)
+               
+               
             },
             handleChangeStatus:function(){}
         }

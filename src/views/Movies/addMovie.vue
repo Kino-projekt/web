@@ -62,7 +62,7 @@ export default {
     },
     methods: {
         handleAddMovie: function() {
-      actions.addMovie(this.title, this.description, this.director);
+      actions.addMovie(this.movie.title, this.movie.description, this.movie.director);
       
     },
         }

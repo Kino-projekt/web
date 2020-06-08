@@ -2,15 +2,26 @@ import {backendActions} from './backend'
 
 
 
-const deleteMovie = () => {
-
+const deleteMovie = (movieId, onError) => {
+backendActions.deleteMovie(movieId).done(response => {
+    
+  console.log(response)
+  
+}) .fail(response => {  
+    let errors =[]
+    errors.push(
+      { text: response.responseText, key: 0 }
+    )
+    onError(errors)
+});
 
 }
 
 
-const addMovie = (title, description, director) => {
+const addMovie = (title, description, director, onError) => {
 backendActions.addMovie(title, description, director).done(response => {
     console.log(response);
+   
   })
   .fail(response => {
     console.log(response);
@@ -23,8 +34,10 @@ backendActions.addMovie(title, description, director).done(response => {
         return { text: e, key: i };
       });
       
+      
       this.errors = this.errors.concat(errors);
       console.log(this.error);
+      onError(errors)
     }
   });
 
