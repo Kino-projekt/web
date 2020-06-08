@@ -20,6 +20,23 @@ const banUser = (userId) =>{
 }
 
 
+const changeRole = (userId) =>{
+   
+      
+  var request = $.ajax({
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      Authorization: "Bearer " +  store.state.token
+    },
+    url: `https://afternoon-waters-37189.herokuapp.com/api/admin/users/${userId}/update-role`,
+    type: "PATCH",
+    contentType: "application/json; charset=utf-8",
+
+   data: null
+  });
+return request;
+}
+
 
 
 
@@ -28,7 +45,8 @@ const banUser = (userId) =>{
 
 
 const backendActions = {
-    'banUser': banUser
+    'banUser': banUser,
+    'changeRole':changeRole
 }
 
 export {

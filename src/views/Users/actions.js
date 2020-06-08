@@ -28,8 +28,28 @@ backendActions.banUser(userId).done(response => {
 }
 
 
-const changeStatus = () => {
-
+const changeStatus = (userId, onError) => {
+    backendActions.changeRole(userId).done(response => {
+    
+        console.log(response)
+        
+     })
+     .fail(response => {
+         console.log(response)
+         if (
+             response !== null &&
+             response.responseJSON !== undefined &&
+             response.responseJSON.error != null
+         ) {
+             let errors = []
+             errors.push({
+                 text: response.responseJSON.error,
+                 key: 0
+             })
+             onError(errors)
+     
+         }
+     });
 
 }
 

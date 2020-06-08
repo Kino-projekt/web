@@ -47,9 +47,31 @@ const addMovie = (title, description, director) => {
       });
     return request;
 }
+const addComment = (descriptionComment, movieId) =>{
+  var criteria = {
+    content: descriptionComment,
+    movieId: movieId.toString()
+  };
+  var request = $.ajax({
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      Authorization: "Bearer " +  store.state.token
+    },
+    url: "https://afternoon-waters-37189.herokuapp.com/api/comments",
+    type: "POST",
+    contentType: "application/json; charset=utf-8",
+
+    data: JSON.stringify(criteria)
+    
+  });
+return request;
+}
+
+
 
 const backendActions = {
     'addMovie': addMovie,
+    'addComment': addComment,
     'deleteMovie': deleteMovie
 }
 

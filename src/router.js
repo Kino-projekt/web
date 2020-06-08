@@ -9,7 +9,9 @@ import Login from './components/Login/Login.vue'
 import Seances from './views/Seances.vue'
 import Movies from './views/Movies/Movies.vue'
 import Halls from './views/Halls/Halls.vue'
+import addHall from './views/Halls/addHall.vue'
 import addMovie from './views/Movies/addMovie.vue'
+import addComment from './views/Movies/addComment.vue'
 import addArticle from './views/adminArticles/addArticle.vue'
 import store from './store.js'
 
@@ -60,6 +62,18 @@ let router = new Router({
       path: '/addMovie',
       name: 'addmovie',
       component: addMovie,
+     
+    },
+    {
+      path: '/addHall',
+      name: 'addHall',
+      component: addHall,
+     
+    },
+    {
+      path: '/addComment',
+      name: 'addComment',
+      component: addComment,
      
     },
     {

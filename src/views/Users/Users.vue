@@ -8,6 +8,7 @@
      
             <article>{{ user.role }}</article>
             <article>{{ user.id }}</article>
+            
       <v-btn
       
       color="error"
@@ -20,7 +21,7 @@
       right
       color="primary"
       class="mr-4"
-      @click="handleChangeStatus"
+      @click="handleChangeStatus(user)"
     >
       Zmień Status
     </v-btn>
@@ -40,7 +41,9 @@ export default {
                
                
             },
-            handleChangeStatus:function(){}
+            handleChangeStatus:function(user){
+                actions.changeStatus(user.id)
+            }
         }
     },
     methods: {

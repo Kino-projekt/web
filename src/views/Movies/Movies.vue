@@ -15,8 +15,11 @@
       <article>Opis filmu: {{ movie.description }}</article>
       <p>Reżyser: {{ movie.director }}</p>
       <p>Stworzony: {{ movie.createdAt }}</p>
+       <p>KOMENTARZE:</p>
+       <p v-for="comment in movie.comments" v-bind:key="comment.id">{{comment.author.email}}: {{ comment.content }}</p>
 
-      <v-btn color="error" class="mr-4" @click="handleDelete(movie.id)">Usuń</v-btn>
+      <v-btn color="error" class="mr-4" @click="handleDelete(movie.id)" v-if="isAdmin()">Usuń</v-btn>
+      <v-btn color="primary" class="mr-4" @click="$router.push({ name: 'addComment', query: {movieId: movie.id} })" v-if="isLogged()">Dodaj komentarz</v-btn>
      
     </div>
   </div>
@@ -24,11 +27,14 @@
 
 <script>
 import { actions } from "./actions";
+import store from "../../store"
+
 export default {
   data() {
     return {
-      movies: [],
-      errors: []
+    
+    movies: [],
+    errors: []
     };
   },
   methods: {
@@ -37,13 +43,24 @@ export default {
     },
     onError: function(errors) {
       this.errors = this.errors.concat(errors);
-    }
+    },
+    isAdmin: function(){
+        
+                return  store.state.user!=null &&  store.state.user.role =="ADMIN"
+    },
+    isLogged: function(){
+        
+                return  store.state.user!=null 
+    },
+    
   },
+
   created() {
     this.$http
       .get("https://afternoon-waters-37189.herokuapp.com/api/movies")
       .then(function(data) {
         this.movies = data.body;
+
       });
   }
 };
