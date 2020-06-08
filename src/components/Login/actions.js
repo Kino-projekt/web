@@ -1,7 +1,6 @@
-import {
-    backendActions
-} from './backend'
+import {  backendActions} from './backend'
 import store from './../../store'
+import router from './../../router'
 
 const fetchSignIn = (email, password, onError) => {
     backendActions
@@ -19,6 +18,7 @@ const fetchSignIn = (email, password, onError) => {
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(response[0]));
             store.commit("auth_success", response);
+            router.push({path:"/"});
         })
         .fail(response => {
             console.log(response)
@@ -44,6 +44,7 @@ const logout = () => {
     localStorage.removeItem('user')
     console.log(store.state.token)
     console.log(store.state.user)
+    router.push({path:"/"});
     
 }
 

@@ -1,23 +1,59 @@
 <template>
     <div id="show-blogs">
         <h1>Artykuły Admin </h1>
-        <div v-for="blog in blogs" class="single-blog"  v-bind:key="blog.id">
-            <h2>{{ blog.title }}</h2>
-            <article>{{ blog.description }}</article>
-             <article>{{ blog.status }}</article>
+        <v-btn
+        
+      right
+      color="success"
+      class="mr-4"
+      @click="$router.push({ path: '/addArticle' })"
+    >Dodaj Artykuł</v-btn>
+    <div v-for="error in errors" v-bind:key="error.key">
+        <h2>{{ error.text }}</h2>
+        </div>
+        <div v-for="article in articles" class="single-blog"  v-bind:key="article.id">
+            <h2>{{ article.title }}</h2>
+            <article>{{ article.description }}</article>
+             <article>{{ article.status }}</article>
+              <v-btn
+        @click="handleDelete(article)"
+      right
+      color="error"
+      class="mr-4"
+      
+    >Usuń</v-btn>
+     <v-btn
+        
+      right
+      color="primary"
+      class="mr-4"
+     @click="handleChangeStatus(article, this.onError)"
+    >Zmień Status</v-btn>
         </div>
     </div>
 </template>
 
 <script>
-//import $ from "jquery";
+import {actions} from './actions'
 export default {
     data () {
         return {
-            blogs: []
+            articles: []
         }
     },
     methods: {
+         handleDelete:function(article){
+                 console.log(article)
+                 actions.deleteArticle(article.id)
+               console.log(article)
+               
+            },
+            handleChangeStatus:function(article){
+                actions.changeStatus(article.id)
+            },
+            onError: function(errors) {
+      this.errors = this.errors.concat(errors);
+    },
     },
    
 created() {
@@ -28,7 +64,7 @@ created() {
             }
         }).then(function(data){
             console.log(data)
-            this.blogs = data.body;
+            this.articles = data.body;
             console.log(this.blogs)
         });
     

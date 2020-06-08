@@ -1,4 +1,5 @@
 <template>
+<div id="add-blog" >
   <v-form
     ref="form"
     v-model="valid"
@@ -17,7 +18,7 @@
    <v-text-field
             v-model="password"
              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-            
+            :rules="[rules.required, rules.min]"
             :type="show1 ? 'text' : 'password'"
             name="input-10-1"
             label="Hasło"
@@ -40,6 +41,7 @@
         <h2>{{ error.text }}</h2>
       </div>
   </v-form>
+  </div>
 </template>
 
 <script>
@@ -53,7 +55,16 @@ export default {
       errors: [],
       email: "",
       password: "",
-      token: ""
+      token: "",
+      rules: {
+          required: value => !!value || 'Nie może być pusty.',
+          min: v => v.length >= 8 || 'Minimum 8 znaków, litera mała, duża, cyfra oraz znak zpecjalny',
+         
+        },
+        emailRules: [
+        v => !!v || 'E-mail jest pusty',
+        v => /.+@.+\..+/.test(v) || 'musi być e-mail',
+      ],
     };
   },
   methods: {
@@ -88,7 +99,7 @@ export default {
             let errors = response.responseJSON.error.map((e, i) => {
               return { text: e, key: i };
             });
-            //Vue.set(this.data, "error", errors);
+          
             this.errors = this.errors.concat(errors);
             console.log(this.error);
           }
@@ -105,15 +116,6 @@ export default {
 };
 </script>
 
-<style>
-#show-blogs {
-  max-width: 800px;
-  margin: 0px auto;
-}
-.single-blog {
-  padding: 20px;
-  margin: 20px 0;
-  box-sizing: border-box;
-  background: #eee;
-}
+<style scoped>
+
 </style>

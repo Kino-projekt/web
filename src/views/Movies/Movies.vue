@@ -6,6 +6,7 @@
       color="success"
       class="mr-4"
       @click="$router.push({ path: '/addMovie' })"
+      v-if="isAdmin()"
     >Dodaj Film</v-btn>
      <div v-for="error in errors" v-bind:key="error.key">
         <h2>{{ error.text }}</h2>

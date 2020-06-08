@@ -4,7 +4,7 @@ import router from '../../router'
 
 const deleteHall = (hallId, onError) => {
 backendActions.deleteHall(hallId).done(response => {
-    
+  alert("Sala usunięta");
   console.log(response)
   
 }) .fail(response => {  

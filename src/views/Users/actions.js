@@ -30,7 +30,7 @@ backendActions.banUser(userId).done(response => {
 
 const changeStatus = (userId, onError) => {
     backendActions.changeRole(userId).done(response => {
-    
+        
         console.log(response)
         
      })
@@ -52,6 +52,9 @@ const changeStatus = (userId, onError) => {
      });
 
 }
+
+
+
 
 
 const actions = {

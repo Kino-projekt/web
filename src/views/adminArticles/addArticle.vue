@@ -22,8 +22,11 @@
       rows="15"
       v-model="article.description"
     ></v-textarea>
-     <v-btn  flat color="grey" class="ml-8" @click="handlePostArticle">
-        <span>Dodaj Artykuł</span>
+    <v-btn  flat color="success" class="ml-8" @click="handlePostArticle">
+        <span>Dodaj</span>
+      </v-btn>
+       <v-btn  flat color="error" class="ml-8" @click="$router.push({ path: '/adminArticles' })">
+        <span>Cofnij</span>
       </v-btn>
 <div v-for="error in errors" v-bind:key="error.key">
         <h2>{{ error.text }}</h2>
@@ -32,7 +35,8 @@
 </template>
 
 <script>
-import $ from "jquery";
+import { actions } from "./actions";
+
 export default {
     
     data () {
@@ -49,42 +53,7 @@ export default {
     },
     methods: {
         handlePostArticle: function() {
-       var criteria = {
-        title: this.article.title,
-        description: this.article.description,
-        accessToken: this.$store.state.token
-      };
-      var request = $.ajax({
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Authorization: "Bearer " +  this.$store.state.token
-        },
-        url: "https://afternoon-waters-37189.herokuapp.com/api/admin/articles",
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-
-        data: JSON.stringify(criteria)
-      });
-      console.log(criteria)
-      request
-        .done(response => {
-          console.log(response);
-        })
-        .fail(response => {
-          console.log(response);
-          if (
-            response !== null &&
-            response.responseJSON !== undefined &&
-            response.responseJSON.error != null
-          ) {
-            let errors = response.responseJSON.error.map((e, i) => {
-              return { text: e, key: i };
-            });
-            
-            this.errors = this.errors.concat(errors);
-            console.log(this.error);
-          }
-        });
+       actions.addArticle(this.article.title, this.article.description);
     },
         }
     }

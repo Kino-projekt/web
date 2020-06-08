@@ -6,6 +6,7 @@
   >
     
   <v-col cols="12" sm="" md="3">
+   
     <v-text-field 
       v-model="email"
       :rules="emailRules"
@@ -17,7 +18,7 @@
    <v-text-field
             v-model="password"
              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-            
+            :rules="[rules.required, rules.min]"
             :type="show1 ? 'text' : 'password'"
             name="input-10-1"
             label="Hasło"
@@ -57,7 +58,16 @@ export default {
       blogs: [],
       errors: [],
       email: "",
-      password: ""
+      password: "",
+      rules: {
+          required: value => !!value || 'Nie może być pusty.',
+          min: v => v.length >= 8 || 'Minimum 8 znaków, litera mała, duża, cyfra oraz znak zpecjalny',
+         
+        },
+        emailRules: [
+        v => !!v || 'E-mail jest pusty',
+        v => /.+@.+\..+/.test(v) || 'musi być e-mail',
+      ],
     };
   },
   methods: {

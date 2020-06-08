@@ -5,8 +5,11 @@ import router from './router'
 import VueResource from 'vue-resource'
 import store from './store.js';
 import $ from 'jquery';
+import vSelect from 'vue-select'
 
+Vue.component('v-select', vSelect)
 
+import 'vue-select/dist/vue-select.css';
 
 
 
@@ -23,5 +26,6 @@ new Vue({
   VueResource,
   $,
   store,
+  vSelect,
   render: h => h(App)
 }).$mount('#app')

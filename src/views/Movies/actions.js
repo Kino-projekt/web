@@ -4,7 +4,7 @@ import router from "../../router"
 
 const deleteMovie = (movieId, onError) => {
 backendActions.deleteMovie(movieId).done(response => {
-    
+  alert("Film usunięty");
   console.log(response)
   
 }) .fail(response => {  
@@ -41,7 +41,7 @@ const addComment = (descriptionComment, movieId, onError) => {
 const addMovie = (title, description, director, onError) => {
 backendActions.addMovie(title, description, director).done(response => {
     console.log(response);
-   
+    router.push({path:"/movies"});
   })
   .fail(response => {
     console.log(response);

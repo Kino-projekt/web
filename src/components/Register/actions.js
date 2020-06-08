@@ -1,7 +1,5 @@
-import {
-    backendActions
-} from './backend'
-
+import { backendActions} from './backend'
+import router from '../../router'
 
 
 const fetchSignUp = (email, password, onError) =>{
@@ -9,6 +7,8 @@ const fetchSignUp = (email, password, onError) =>{
     .SignUp(email, password)
     .done(response => {
       console.log(response);
+      alert("konto zostało utworzone");
+      router.push({path:"/login"});
     })
     .fail(response => {
       console.log(response);
